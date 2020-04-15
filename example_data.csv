@@ -1,0 +1,9 @@
+﻿ID,farm_id,field_id,country,province,city,crop,season,grain_yield$kg.ha,farm_size$ha,name_farmer,longitude$decimal_degrees,latitude$decimal_degrees
+x1,A,F1,Netherlands,Gelderland,Wageningen,maize,1,2924,1,John Smith,5.664526,51.99115
+x2,A,F1,Netherlands,Gelderland,Wageningen,maize,2,3183,1,John Smith,5.664526,51.99115
+x3,B,F1,Netherlands,Gelderland,Wageningen,maize,1,2829,1.5,Sally Jones,5.662707,51.986473
+x4,B,F1,Netherlands,Gelderland,Wageningen,maize,2,1692,1.5,Sally Jones,5.662707,51.986473
+x5,C,F1,Netherlands,Gelderland,Wageningen,maize,1,3401,0.5,Bob Sponge,5.673245,51.992453
+x6,C,F1,Netherlands,Gelderland,Wageningen,maize,2,3537,0.5,Bob Sponge,5.673245,51.992453
+x7,C,F2,Netherlands,Gelderland,Wageningen,maize,1,2205,0.5,Bob Sponge,5.673245,51.992453
+x8,C,F2,Netherlands,Gelderland,Wageningen,maize,2,1204,0.5,Bob Sponge,5.673245,51.992453
