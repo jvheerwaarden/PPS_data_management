@@ -1,1 +1,13 @@
 #Readme for data management script
+
+The R script "Master_Script_V1.0.R" has been developed to automates the creation of part of the PPS standard data management structure. described above. Briefly, it will create the required directory structure, read any raw data files (.csv or .xlsx) stored in the project directory and place them in the data/raw directory. 
+
+It will process the raw data into a corresponding processed .xslx file, containing 1. a meta-data worksheet with all required fields and 2. A list of all variables in the data with appropriate units if supplied and extra columns for variable definitions and privacy sensitivity.
+
+To use this script follow the following steps:
+
+1. Create a main directory and place the script and any raw data files (in .csv or .xlsx format) inside.
+
+2. Open R, set the working directory to the main directory and run/source the script
+
+An example data file: "example_data.csv", is distributed with this script and can be used for testing. More details on PPS' data management guidelines can be found in the "Documentation.docx" document.
