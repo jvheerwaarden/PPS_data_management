@@ -1,4 +1,4 @@
-#Readme for data management script
+#Readme for data management script V1.0
 
 The R script "Master_Script_V1.0.R" has been developed to automates the creation of part of the PPS standard data management structure. described above. Briefly, it will create the required directory structure, read any raw data files (.csv or .xlsx) stored in the project directory and place them in the data/raw directory. 
 
