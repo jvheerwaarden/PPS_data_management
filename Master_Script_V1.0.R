@@ -22,7 +22,7 @@ path.data.op=paste(getwd(),"/data/definitions_protocols/",sep="")
 path.writing=paste(getwd(),"/writing/",sep="")
 path.results.raw=paste(getwd(),"/results/raw",sep="")
 path.results.tab=paste(getwd(),"/results/tables",sep="")
-path.results.im=paste(getwd(),"/results/images",sep="")
+path.results.im=paste(getwd(),"/results/figures",sep="")
 path.scripts=paste(getwd(),"/scripts/",sep="")
 
 
