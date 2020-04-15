@@ -20,7 +20,9 @@ path.data.proc=paste(getwd(),"/data/processed/",sep="")
 path.data.op=paste(getwd(),"/data/definitions_protocols/",sep="")
 
 path.writing=paste(getwd(),"/writing/",sep="")
-path.results=paste(getwd(),"/results/",sep="")
+path.results.raw=paste(getwd(),"/results/raw",sep="")
+path.results.tab=paste(getwd(),"/results/tables",sep="")
+path.results.im=paste(getwd(),"/results/images",sep="")
 path.scripts=paste(getwd(),"/scripts/",sep="")
 
 
@@ -28,7 +30,9 @@ dir.create(path.data.raw, showWarnings=F, recursive=T)
 dir.create(path.data.proc, showWarnings=F, recursive=T)
 dir.create(path.data.op, showWarnings=F, recursive=T)
 dir.create(path.writing, showWarnings=F, recursive=T)
-dir.create(path.results, showWarnings=F, recursive=T)
+dir.create(path.results.raw, showWarnings=F, recursive=T)
+dir.create(path.results.tab, showWarnings=F, recursive=T)
+dir.create(path.results.im, showWarnings=F, recursive=T)
 dir.create(path.scripts, showWarnings=F, recursive=T)
 
 
