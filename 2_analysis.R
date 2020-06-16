@@ -36,12 +36,22 @@ ggsave(filename = "./results/figures/summary_plot.png",
 fit <- lm(yield_tha ~ farm + fertilizer, data = d)
 
 ## Get an ANOVA table
-anova(fit)
+av=anova(fit)
+
 
 ## Calculate Estimated Marginal Means, aka adjusted means:
 ## These are the mean yield for each combination of farm and fertilizer
 ## as the model predicts them.
 emms <- emmeans(fit, ~  farm + fertilizer)
+
+##open text file to write results to
+sink(file="results/raw/various_stats.txt")
+print("anova table:")
+print(av)
+print("em means table:")
+print(emms)
+sink()
+
 
 ## Fancy graph: combining raw data and adjusted means and their corresponding
 ## confidence interval
