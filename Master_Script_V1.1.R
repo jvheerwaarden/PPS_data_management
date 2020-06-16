@@ -31,7 +31,7 @@ setwd(wd)
 file.list.wd.initial= list.files(wd)
 
 if(sum(grepl("example_data", file.list.wd.initial))==0) download.file("https://raw.githubusercontent.com/jvheerwaarden/PPS_data_management/master/example_data.csv", destfile="example_data.csv")
-if(sum(grepl("Documentation", file.list.wd.initial))==0) download.file("https://github.com/jvheerwaarden/PPS_data_management/blob/master/Documentation.docx","Documentation.docx")
+if(sum(grepl("Documentation", file.list.wd.initial))==0) download.file("https://github.com/jvheerwaarden/PPS_data_management/blob/master/Documentation.docx?raw=true","Documentation.docx")
 if(sum(grepl("Readme", file.list.wd.initial))==0) download.file("https://raw.githubusercontent.com/jvheerwaarden/PPS_data_management/master/Readme","Readme.txt")
 
 if(sum(grepl("0_build_project", file.list.wd.initial))==0) download.file("https://raw.githubusercontent.com/jvheerwaarden/PPS_data_management/master/0_build_project.R", destfile="0_build_project.R")
