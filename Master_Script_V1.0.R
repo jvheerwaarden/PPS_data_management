@@ -1,18 +1,48 @@
+
+##install all required packages
+
+# Install required packages if necessary
+required_packages <- c("openxlsx","car", "emmeans","readr")
+
+for (package in required_packages) {
+  if(package %in% rownames(installed.packages()) == FALSE){
+    install.packages(package, dependencies = TRUE)
+  }
+}
+
+
+
+
 ##required packages
 library(openxlsx)
 
 ###add ontology read
-
 ##add final metadata, implement automated inference 
 ##make sure metdata and variable definitions are not overwritten if present!!!!!
 
 ###
-
-
 ###set working directory 
 wd=getwd()
 wd=gsub("scripts","", wd)
 setwd(wd)
+
+
+##download files if not present
+file.list.wd.initial= list.files(wd)
+
+if(sum(grepl("example_data", file.list.wd.initial))==0) download.file("https://raw.githubusercontent.com/jvheerwaarden/PPS_data_management/master/example_data.csv", destfile="example_data.csv")
+if(sum(grepl("Documentation", file.list.wd.initial))==0) download.file("https://github.com/jvheerwaarden/PPS_data_management/blob/master/Documentation.docx","Documentation.docx")
+if(sum(grepl("Readme", file.list.wd.initial))==0) download.file("https://raw.githubusercontent.com/jvheerwaarden/PPS_data_management/master/Readme","Readme.txt")
+
+if(sum(grepl("0_build_project", file.list.wd.initial))==0) download.file("https://raw.githubusercontent.com/jvheerwaarden/PPS_data_management/master/0_build_project.R", destfile="0_build_project.R")
+if(sum(grepl("1_data_cleaning", file.list.wd.initial))==0) download.file("https://raw.githubusercontent.com/jvheerwaarden/PPS_data_management/master/1_data_cleaning.R", destfile="1_data_cleaning.R")
+if(sum(grepl("2_analysis.R", file.list.wd.initial))==0) download.file("https://raw.githubusercontent.com/jvheerwaarden/PPS_data_management/master/2_analysis.R", destfile="2_analysis.R")
+if(sum(grepl("MiRAE_funcs", file.list.wd.initial))==0) download.file("https://raw.githubusercontent.com/jvheerwaarden/PPS_data_management/master/MiRAE_funcs.R", destfile="MiRAE_funcs.R")
+if(sum(grepl("Meststof proef WUR.csv", file.list.wd.initial))==0) download.file("https://raw.githubusercontent.com/jvheerwaarden/PPS_data_management/master/Meststof%20proef%20WUR.csv", destfile="Meststof proef WUR.csv")
+#if(sum(grepl("Meststof proef WUR_metadata.xlsx", file.list.wd.initial))==0 download.file("https://github.com/ALanguillaume/MiRAE/blob/master/data/raw/Meststof%20proef%20WUR_metadata.xlsx?raw=true", destfile="Meststof proef WUR_metadata.xlsx")
+
+
+
 
 
 ####make directories for data
@@ -24,6 +54,8 @@ path.writing=paste(getwd(),"/writing/",sep="")
 path.results.raw=paste(getwd(),"/results/raw",sep="")
 path.results.tab=paste(getwd(),"/results/tables",sep="")
 path.results.im=paste(getwd(),"/results/figures",sep="")
+path.results.rep=paste(getwd(),"/results/reports",sep="")
+
 path.scripts=paste(getwd(),"/scripts/",sep="")
 
 
@@ -34,44 +66,49 @@ dir.create(path.writing, showWarnings=F, recursive=T)
 dir.create(path.results.raw, showWarnings=F, recursive=T)
 dir.create(path.results.tab, showWarnings=F, recursive=T)
 dir.create(path.results.im, showWarnings=F, recursive=T)
+dir.create(path.results.rep, showWarnings=F, recursive=T)
 dir.create(path.scripts, showWarnings=F, recursive=T)
 
 
 ####check presence of data files and list
-data.list.wd= list.files(wd)
-data.list.wd = data.list.wd[grep("metadata", data.list.wd,invert=T)]
-data.list.wd = data.list.wd[grep("readme", data.list.wd,invert=T)]
-writing.list.wd=data.list.wd[unique(c(grep(".doc", data.list.wd),grep(".docx", data.list.wd),grep(".txt", data.list.wd),grep(".rtf", data.list.wd)))]
-data.list.wd= data.list.wd[unique(c(grep(".csv", data.list.wd),grep(".xls", data.list.wd)))]
+file.list.wd= list.files(wd)
+file.list.wd = file.list.wd[grep("metadata", file.list.wd,invert=T)]
+file.list.wd = file.list.wd[grep("readme", file.list.wd,invert=T)]
+script.list.wd= file.list.wd[grep(".R", file.list.wd)]
+writing.list.wd= file.list.wd[unique(c(grep(".doc", file.list.wd),grep(".docx", file.list.wd),grep(".txt", file.list.wd),grep(".rtf", file.list.wd)))]
+data.list.wd= file.list.wd[unique(c(grep(".csv", file.list.wd),grep(".xls", file.list.wd)))]
 
+
+###list files already in proper place
 data.list.raw= list.files(path.data.raw)
 writing.list= list.files(path.writing)
+script.list= list.files(path.scripts)
+
 ##remove metedata
 data.list.raw= data.list.raw[grep("metadata",data.list.raw,invert=T)]
 data.list.proc= list.files(path.data.proc)
 
 ##if raw folder is empty, move data from main folder to raw
 
-if(length(data.list.raw)==0){
-file.copy(data.list.wd, path.data.raw)	
-file.remove(data.list.wd)	
+##copy data to correct location
+fc=file.copy(data.list.wd, path.data.raw, overwrite=F)	
+file.remove(data.list.wd[fc])	
 
+##copy writing to correct location
+
+fc=file.copy(writing.list.wd, path.writing, overwrite=F)	
+file.remove(writing.list.wd)[fc]
+
+##copy scripts to correct location
+
+fc=file.copy(script.list.wd, path.scripts, overwrite=F)	
+file.remove(script.list.wd)[fc]	
+
+##list raw files for prcessing
 data.list.raw= list.files(path.data.raw)
 ##remove metedata
 data.list.raw= data.list.raw[grep("metadata",data.list.raw,invert=T)]
 	
-}
-
-
-if(length(writing.list)==0){
-
-file.copy(writing.list.wd, path.writing)	
-file.remove(writing.list.wd)	
-	
-}
-	
-
-
 ##now read all excel workbooks and sheets within workbooks
 
 for(wb in data.list.raw){
@@ -83,12 +120,7 @@ wb.name=gsub(".xlsx","", wb)
 file=paste(path.data.raw, wb,sep="/")
 sheets=getSheetNames(file)	
 	
-
-
-
 }	
-
-
 
 if(grepl(".csv",wb)){
 
@@ -97,8 +129,6 @@ file=paste(path.data.raw, wb,sep="/")
 sheets="data"	
 	
 }	
-
-
 
 ##create workbook to store data and metadata
 meta.wb.name=paste(wb.name,"_metadata",sep="")
@@ -225,4 +255,9 @@ saveWorkbook(meta.wb,file = paste(path.data.proc,meta.wb.name,".xlsx",sep=""), o
 
 
 }
+
+
+
+###now run analysis scripts 
+source("./scripts/0_build_project.R")
 
