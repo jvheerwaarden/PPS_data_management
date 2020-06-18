@@ -213,7 +213,7 @@ meta.data.frame=data.frame(field= field.vec,field_name= field_name.vec,values=NA
 
 
 ###check if workbook with variable definitions and metadata already present in processed and make sure not overwritten
-exist.wb= data.list.proc[grep(wb.name, data.list.proc)]
+exist.wb= data.list.proc[which(data.list.proc==paste(wb.name,"_metadata.xlsx",sep=""))]
 
 if(length(exist.wb)>0){
 ##read.data and extract
