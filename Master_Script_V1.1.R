@@ -73,7 +73,7 @@ dir.create(path.scripts, showWarnings=F, recursive=T)
 file.list.wd= list.files(wd)
 file.list.wd = file.list.wd[grep("metadata", file.list.wd,invert=T)]
 file.list.wd = file.list.wd[grep("readme", file.list.wd,invert=T)]
-script.list.wd= file.list.wd[grep(".R", file.list.wd)]
+script.list.wd= file.list.wd[grep("\\.R", file.list.wd)]
 writing.list.wd= file.list.wd[unique(c(grep(".doc", file.list.wd),grep(".docx", file.list.wd),grep(".txt", file.list.wd),grep(".rtf", file.list.wd)))]
 data.list.wd= file.list.wd[unique(c(grep(".csv", file.list.wd),grep(".xls", file.list.wd)))]
 
