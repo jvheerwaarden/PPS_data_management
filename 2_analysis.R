@@ -28,7 +28,7 @@ summary_plot <- ggplot(d)+ # initialize graph
 summary_plot
 
 # Save the summary plot
-ggsave(filename = "./results/figures/summary_plot.png",
+ggsave(filename = "./results/figures/2.summary_plot.png",
        plot = summary_plot)
 
 
@@ -45,7 +45,7 @@ av=anova(fit)
 emms <- emmeans(fit, ~  farm + fertilizer)
 
 ##open text file to write results to
-sink(file="results/raw/various_stats.txt")
+sink(file="results/raw/2.various_stats.txt")
 print("anova table:")
 print(av)
 print("em means table:")
@@ -73,5 +73,5 @@ emms_plot <- ggplot(d)+
 emms_plot
 
 # Save the fancy plot
-ggsave(filename = "./results/figures/emms_plot.png",
+ggsave(filename = "./results/figures/2.emms_plot.png",
        plot = emms_plot)
